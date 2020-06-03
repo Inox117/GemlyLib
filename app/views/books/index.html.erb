@@ -22,11 +22,11 @@
                       <p class="card-text"><%= book.title %></p>
                       <div class="d-flex justify-content-between align-items-center">
                           <div class="btn-group">
-                            <a><%= link_to 'Show', book_path(book), :class => "button btn btn-primary btn-xs"%></a>
-                            <a><%= link_to 'Edit', edit_book_path(book ), :class => "button btn btn-primary btn-xs"%></a>
-                            <a><%= link_to 'Destroy', book_path(book), :class => "button btn btn-primary btn-xs",
+                            <%= link_to 'Show', book_path(book), :class => "button btn btn-primary btn-xs"%>
+                            <%= link_to 'Edit', edit_book_path(book ), :class => "button btn btn-primary btn-xs"%>
+                            <%= link_to 'Destroy', book_path(book), :class => "button btn btn-danger btn-xs",
                                     method: :delete,
-                                    data: { confirm: 'Are you sure?' } %></a>
+                                    data: { confirm: 'Are you sure?' } %>
                           </div>
                       </div>
                     </div>
