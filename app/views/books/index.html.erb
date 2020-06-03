@@ -1,20 +1,38 @@
-<h1>Listing Books</h1>
+<%= render 'header' %>
 
-<table>
-  <tr>
-    <th>Title</th>
-    <th>Text</th>
-    <th></th>
-  </tr>
+<section class="jumbotron text-center">
+        <div class="container">
+            <h1>Our collections</h1>
+            <p>
+                <a class="btn btn-primary my-2" href="/books/new">Add a book</a>
+                <a href="#" class="btn btn-secondary my-2">Consult everything</a>
+            </p>
+        </div>
+</section>
 
-  <% @books.each do |book| %>
-    <tr>
-      <td><%= book.title %></td>
-      <td><%= link_to 'Show', book_path(book) %></td>
-      <td><%= link_to 'Edit', edit_book_path(book )%></td>
-      <td><%= link_to 'Destroy', book_path(book),
-              method: :delete,
-              data: { confirm: 'Are you sure?' } %></td>
-    </tr>
-  <% end %>
-</table>
+<div class="album py-5 bg-light">
+        <div class="container">
+
+            <div class="row">
+              <% @books.each do |book| %>
+                <div class="col-md-4">
+                  <div class="card mb-4 shadow-sm">
+                    <%= image_tag "http://covers.openlibrary.org/b/isbn/#{book.isbn13}.jpg" %>
+                    <div class="card-body">
+                      <p class="card-text"><%= book.title %></p>
+                      <div class="d-flex justify-content-between align-items-center">
+                          <div class="btn-group">
+                            <a><%= link_to 'Show', book_path(book), :class => "button btn btn-primary btn-xs"%></a>
+                            <a><%= link_to 'Edit', edit_book_path(book ), :class => "button btn btn-primary btn-xs"%></a>
+                            <a><%= link_to 'Destroy', book_path(book), :class => "button btn btn-primary btn-xs",
+                                    method: :delete,
+                                    data: { confirm: 'Are you sure?' } %></a>
+                          </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+        </div>
+    </div>
