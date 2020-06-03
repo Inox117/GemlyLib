@@ -1,7 +1,12 @@
 class BooksController < ApplicationController
 
   def index
-    @books = Book.all
+    if(params.has_key?(:search) && !params[:search].empty? )
+      @parameter = params[:search].downcase
+      @books = Book.filter_by_title(@parameter)
+    else
+      @books = Book.all
+    end
   end
 
   def show
@@ -36,6 +41,16 @@ class BooksController < ApplicationController
     end
   end
 
+  def search
+    if params[:search].blank?
+      redirect_to(root_path, alert: "Empty field!") and return
+    else
+      @parameter = params[:search].downcase
+      @books = Book.filter_by_title(@parameter)
+      logger.debug @books
+    end
+  end
+
   def destroy
     @book = Book.find(params[:id])
     @book.destroy
@@ -47,5 +62,4 @@ class BooksController < ApplicationController
     def book_params
       params.require(:book).permit(:title, :summary, :isbn10, :isbn13, :author, :illustrator, :publication_date, :publisher, :number_of_page)
     end
-
 end
